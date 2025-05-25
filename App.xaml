@@ -16,9 +16,10 @@
         <Style TargetType="Button">
             <Setter Property="Background" Value="#67BA80"/>
             <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Margin" Value="10"/>
         </Style>
         <Style TargetType="DataGrid">
-            <Setter Property="MinHeight" Value="700"/>
+            <!--<Setter Property="MinHeight" Value="700"/>-->
             <Setter Property="MaxHeight" Value="1300"/>
         </Style>
         <Style TargetType="ScrollViewer">

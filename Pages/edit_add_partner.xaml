@@ -9,22 +9,39 @@
     <Grid Height="500" Width="700">
      
         <StackPanel Width="450">
-            <Label HorizontalAlignment="Center" >Окно редактирования / добавления данных </Label>
+            <Label HorizontalAlignment="Center" >Окно редактирования / добавления данных </Label> 
+            
+            
             <TextBlock Text="Название:"/>
-            <TextBox x:Name="txtName" Margin="0,0,0,10"/>
+            <TextBox x:Name="txtName" />
 
-            <TextBlock Text="Тип:"/>
-            <TextBox x:Name="txtType" Margin="0,0,0,10"/>
+            <TextBlock Text="Тип:"/> 
+            <TextBox x:Name="txtType"/>
+
+            <TextBlock Text="Адресс:"/>
+            <TextBox x:Name="txtadress"/>
+
+            <TextBlock Text="INN:"/>
+            <TextBox x:Name="txtINN"/>
+
+            <TextBlock Text="Рейтинг:"/>
+            <TextBox x:Name="txtrating"/>
 
             <TextBlock Text="ФИО директора:"/>
-            <TextBox x:Name="txtFio" Margin="0,0,0,10"/>
-
-            <TextBlock Text="Телефон:"/>
-            <TextBox x:Name="txtPhone" Margin="0,0,0,20"/>
+            <TextBox x:Name="txtFio" /> 
+            
+            <TextBlock Text="Email директора:"/>
+            <TextBox x:Name="txtemail" /> 
+            
+            <TextBlock Text="Password директора:"/>
+            <TextBox x:Name="txtpas" /> 
+            
+            <TextBlock Text="Телефон директора:"/>
+            <TextBox x:Name="txtphone" />
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="btnSave" Content="Сохранить" Width="100" 
-                        Margin="0,0,10,0" Click="btnSave_Click"/>
+                        Click="btnSave_Click"/>
                 <Button x:Name="btnCancel" Content="Отмена" Width="100" 
                         Click="btnCancel_Click"/>
             </StackPanel>

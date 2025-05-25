@@ -52,10 +52,7 @@ namespace for_new_сriteria.Pages
 
         public void LoadPartnersData()
         {
-            // Получаем список партнеров
             var partners = db.partnershow.ToList();
-
-            // Создаем анонимный тип с нужными полями + скидкой
             var partnerData = partners.Select(p => new
             {   
                 p.ID,
@@ -67,7 +64,6 @@ namespace for_new_сriteria.Pages
                 TotalProducts = db.eternalshow
                     .Where(e => e.partner_ID == p.ID)
                     .Sum(e => e.number),
-                // Рассчитываем скидку
                 Discount = CalculateDiscount(
                     db.eternalshow
                         .Where(e => e.partner_ID == p.ID)
@@ -86,7 +82,7 @@ namespace for_new_сriteria.Pages
                 if (cur != null)
                 {
                     edit_add_partner w = new edit_add_partner(cur.ID);
-                    w.ShowDialog(); // Используем ShowDialog для модального окна
+                    w.ShowDialog();
 
                     LoadPartnersData();
                 }
@@ -94,9 +90,7 @@ namespace for_new_сriteria.Pages
                 {
                     MessageBox.Show("Возникла ошибка");
                     edit_add_partner w = new edit_add_partner(0);
-                    w.ShowDialog(); // Используем ShowDialog для модального окна
-
-                    // Обновляем данные после закрытия окна редактирования
+                    w.ShowDialog(); 
                     LoadPartnersData();
                 }
 
