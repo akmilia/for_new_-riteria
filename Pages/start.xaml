@@ -8,7 +8,7 @@
       Title="Стартовая страница">
 
     <Grid>
-        <StackPanel>
+        <StackPanel Width="450">
             <Label>Авторизация</Label>
            
             <Label>Логин:</Label>
@@ -16,7 +16,9 @@
             <Label>Пароль:</Label>
             <PasswordBox Name="password"> </PasswordBox>
             <Button Content="Войти" Click="Button_Click"/>
+
+            <Image Source="/Images/Мастер пол.png" Margin="20"/>
         </StackPanel>
-        
+    
     </Grid>
 </Page>

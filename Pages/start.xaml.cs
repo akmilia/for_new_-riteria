@@ -10,19 +10,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using for_new_сriteria.Model; 
 
 namespace for_new_сriteria.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для start.xaml
+    /// Логика взаимодействия для авторизации в системе
     /// </summary>
     public partial class start : Page
     {
+        public new_criteriaEntities db = new new_criteriaEntities(); 
         public start()
         {
             InitializeComponent();
+            ShowsNavigationUI = false;
         } 
 
         public bool ValidateData(string log, string pas)
@@ -55,8 +57,8 @@ namespace for_new_сriteria.Pages
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {   
-
+        {
+          
             try
             {
                 string log = login.Text.Trim();
@@ -64,18 +66,29 @@ namespace for_new_сriteria.Pages
 
                 if (ValidateData(log, pas))
                 {
-                    /**/
-                    NavigationWindow w = (NavigationWindow)Application.Current.MainWindow;
-                    w.Navigate(new Uri("Pages/edit_add.xaml", UriKind.Relative));
-                } 
+                    var user = db.users.FirstOrDefault(u => u.email == log && u.password == pas); 
+                    if (user!=null)
+                    {
+                        MessageBox.Show("Данные правильные!");
+                        NavigationWindow w = (NavigationWindow)Application.Current.MainWindow;
+                        w.Navigate(new Uri("Pages/partners.xaml", UriKind.Relative));
+                    }
+                    else
+                    {
+                        MessageBox.Show("Такой пользователь не существует");
+                        MessageBox.Show("Пожалуйста, введите правильные значения");
 
-            } 
+                    }
+
+                }
+
+            }
             catch
             {
                 MessageBox.Show("Возникла ошибка");
                 MessageBox.Show("Пожалуйста, попробуйте позднее");
             }
-            
+
         }
     }
 }

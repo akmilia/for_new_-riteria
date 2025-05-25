@@ -1,4 +1,5 @@
-﻿using System;
+﻿using for_new_сriteria.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,13 +17,16 @@ using System.Windows.Shapes;
 namespace for_new_сriteria.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для edit_add.xaml
+    /// Логика взаимодействия для postavki.xaml
     /// </summary>
-    public partial class edit_add : Page
+    public partial class postavki : Page
     {
-        public edit_add()
+
+        public new_criteriaEntities db = new new_criteriaEntities();
+        public postavki()
         {
             InitializeComponent();
+            ShowsNavigationUI = true;
         }
     }
 }

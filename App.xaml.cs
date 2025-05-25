@@ -1,10 +1,12 @@
-﻿using System;
+﻿using for_new_сriteria.Pages;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Navigation;
 
 namespace for_new_сriteria
@@ -19,25 +21,15 @@ namespace for_new_сriteria
         {
             NavigationWindow w = new NavigationWindow
             {
-                Source = new Uri ("Pages/start.xaml", UriKind.Relative), 
-                WindowStartupLocation = WindowStartupLocation.CenterScreen, 
+                Source = new Uri("Pages/start.xaml", UriKind.Relative),
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
                 WindowState = WindowState.Maximized,
-                MinHeight = 1000, 
+                MinHeight = 1000,
                 MinWidth = 1200,
-                ShowsNavigationUI = false
+                ShowsNavigationUI = true
             };
 
-
-            w.Navigated += (sender, args) =>
-            {
-                if (args.Content is start && args.Content != w.Content)
-                {
-                    w.RemoveBackEntry();
-                }
-            };
-
-            w.Show();  
-
+            w.Show();
         }
     }
 }
