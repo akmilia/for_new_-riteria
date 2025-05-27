@@ -1,12 +1,5 @@
-﻿using for_new_сriteria.Pages;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Navigation;
 
 namespace for_new_сriteria

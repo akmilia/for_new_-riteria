@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:for_new_сriteria.Pages"
         mc:Ignorable="d"
-        Title="{Binding Title}" Closing="Window_Closing">
+        Title="Работа с партнером" Closing="Window_Closing">
     <Grid Height="500" Width="700">
      
         <StackPanel Width="450">
@@ -41,9 +41,8 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="btnSave" Content="Сохранить" Width="100" 
-                        Click="btnSave_Click"/>
-                <Button x:Name="btnCancel" Content="Отмена" Width="100" 
-                        Click="btnCancel_Click"/>
+                        Click="btnSave_Click" IsDefault="True"/>
+                <Button x:Name="btnCancel" Content="Отмена" Width="100" IsCancel="True"/>
             </StackPanel>
         </StackPanel>
     </Grid>

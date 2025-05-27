@@ -140,5 +140,46 @@ namespace for_new_сriteria.Model
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
+    
+        public virtual ObjectResult<add_partner_Result> add_partner(string partnerName, string partnerType, string partnerAddress, Nullable<int> partnerRating, string partnerINN, string directorFIO, string directorPhone, string directorEmail, string password)
+        {
+            var partnerNameParameter = partnerName != null ?
+                new ObjectParameter("PartnerName", partnerName) :
+                new ObjectParameter("PartnerName", typeof(string));
+    
+            var partnerTypeParameter = partnerType != null ?
+                new ObjectParameter("PartnerType", partnerType) :
+                new ObjectParameter("PartnerType", typeof(string));
+    
+            var partnerAddressParameter = partnerAddress != null ?
+                new ObjectParameter("PartnerAddress", partnerAddress) :
+                new ObjectParameter("PartnerAddress", typeof(string));
+    
+            var partnerRatingParameter = partnerRating.HasValue ?
+                new ObjectParameter("PartnerRating", partnerRating) :
+                new ObjectParameter("PartnerRating", typeof(int));
+    
+            var partnerINNParameter = partnerINN != null ?
+                new ObjectParameter("PartnerINN", partnerINN) :
+                new ObjectParameter("PartnerINN", typeof(string));
+    
+            var directorFIOParameter = directorFIO != null ?
+                new ObjectParameter("DirectorFIO", directorFIO) :
+                new ObjectParameter("DirectorFIO", typeof(string));
+    
+            var directorPhoneParameter = directorPhone != null ?
+                new ObjectParameter("DirectorPhone", directorPhone) :
+                new ObjectParameter("DirectorPhone", typeof(string));
+    
+            var directorEmailParameter = directorEmail != null ?
+                new ObjectParameter("DirectorEmail", directorEmail) :
+                new ObjectParameter("DirectorEmail", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<add_partner_Result>("add_partner", partnerNameParameter, partnerTypeParameter, partnerAddressParameter, partnerRatingParameter, partnerINNParameter, directorFIOParameter, directorPhoneParameter, directorEmailParameter, passwordParameter);
+        }
     }
 }

@@ -10,21 +10,10 @@
 namespace for_new_сriteria.Model
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class partnershow
+    public partial class add_partner_Result
     {
-        public string name { get; set; }
-        public string type { get; set; }
-        public string adress { get; set; }
-        public string INN { get; set; }
-        public int rating { get; set; }
-        public int ID { get; set; }
-        public int director_ID { get; set; }
-        public string fio { get; set; }
-        public string email { get; set; }
-        public string password { get; set; }
-        public string phone { get; set; }
-        public string role { get; set; }
+        public int Success { get; set; }
+        public Nullable<int> NewPartnerId { get; set; }
     }
 }

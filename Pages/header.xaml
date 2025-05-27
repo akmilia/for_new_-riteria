@@ -5,7 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:for_new_сriteria.Pages"
              mc:Ignorable="d" Background="#F4E8D3">
-    <Menu Background="#F4E8D3" FontSize="20" HorizontalAlignment="Stretch">
+    <Menu Background="#F4E8D3" FontSize="20">
+        <MenuItem HorizontalContentAlignment="Center">
+            <MenuItem.Icon>
+                <Image HorizontalAlignment="Center" Source="/Images/Мастер пол.ico"/>
+            </MenuItem.Icon>
+        </MenuItem>
         <MenuItem Header="Партнеры" Click="MenuItem_Click"/>
         <MenuItem Header="Поставки" Name="postavki" Click="postavki_Click"/>
         <MenuItem Header="Продукты" Name="prosucts" Click="prosucts_Click"/>

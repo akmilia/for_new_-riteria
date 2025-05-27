@@ -1,0 +1,25 @@
+﻿using (var db = new new_criteriaEntities())
+{
+    var result = db.Database.SqlQuery<DbResult>(
+        "EXEC sp_AddPartnerWithDirector @PartnerName, @PartnerType, ...",
+        new SqlParameter("@PartnerName", "Название партнёра"),
+        new SqlParameter("@PartnerType", "Тип партнёра"),
+        // остальные параметры
+    ).FirstOrDefault();
+
+    if (result?.Success == 1)
+    {
+        MessageBox.Show($"Добавлен партнёр с ID: {result.NewPartnerId}");
+    }
+    else
+    {
+        MessageBox.Show($"Ошибка: {result?.ErrorMessage}");
+    }
+}
+
+public class DbResult
+{
+    public int Success { get; set; }
+    public int NewPartnerId { get; set; }
+    public string ErrorMessage { get; set; }
+}

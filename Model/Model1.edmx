@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище new_criteriaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище new_criteriaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="partners">
           <Key>
             <PropertyRef Name="ID" />
@@ -129,6 +129,7 @@
             <PropertyRef Name="email" />
             <PropertyRef Name="password" />
             <PropertyRef Name="phone" />
+            <PropertyRef Name="role" />
           </Key>
           <Property Name="name" Type="nchar" MaxLength="250" Nullable="false" />
           <Property Name="type" Type="nchar" MaxLength="250" Nullable="false" />
@@ -141,6 +142,7 @@
           <Property Name="email" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="password" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="phone" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="role" Type="nchar" MaxLength="250" Nullable="false" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6013: Первичный ключ в таблице или представлении "new_criteria.dbo.productshow" не определен, его не удалось вывести. Эта таблица или представление исключены. Чтобы использовать сущность, необходимо проверить схему, добавить правильные ключи и раскомментировать ее.
@@ -252,6 +254,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="add_partner" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PartnerName" Type="nvarchar" Mode="In" />
+          <Parameter Name="PartnerType" Type="nvarchar" Mode="In" />
+          <Parameter Name="PartnerAddress" Type="nvarchar" Mode="In" />
+          <Parameter Name="PartnerRating" Type="int" Mode="In" />
+          <Parameter Name="PartnerINN" Type="nvarchar" Mode="In" />
+          <Parameter Name="DirectorFIO" Type="nvarchar" Mode="In" />
+          <Parameter Name="DirectorPhone" Type="nvarchar" Mode="In" />
+          <Parameter Name="DirectorEmail" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -319,7 +332,8 @@
     [partnershow].[fio] AS [fio], 
     [partnershow].[email] AS [email], 
     [partnershow].[password] AS [password], 
-    [partnershow].[phone] AS [phone]
+    [partnershow].[phone] AS [phone], 
+    [partnershow].[role] AS [role]
     FROM [dbo].[partnershow] AS [partnershow]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_partners_director_partners" Association="Self.FK_partners_director_partners">
@@ -351,8 +365,7 @@
             <End Role="products_extra" EntitySet="products_extra" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="new_criteriaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -480,6 +493,7 @@
             <PropertyRef Name="email" />
             <PropertyRef Name="password" />
             <PropertyRef Name="phone" />
+            <PropertyRef Name="role" />
           </Key>
           <Property Name="name" Type="String" MaxLength="250" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="type" Type="String" MaxLength="250" FixedLength="true" Unicode="true" Nullable="false" />
@@ -492,6 +506,7 @@
           <Property Name="email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="phone" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="role" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="true" />
         </EntityType>
         <Association Name="FK_postavka_product_partner_partners">
           <End Role="partners" Type="Self.partners" Multiplicity="1">
@@ -632,6 +647,17 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="add_partner" ReturnType="Collection(new_criteriaModel.add_partner_Result)">
+            <Parameter Name="PartnerName" Mode="In" Type="String" />
+            <Parameter Name="PartnerType" Mode="In" Type="String" />
+            <Parameter Name="PartnerAddress" Mode="In" Type="String" />
+            <Parameter Name="PartnerRating" Mode="In" Type="Int32" />
+            <Parameter Name="PartnerINN" Mode="In" Type="String" />
+            <Parameter Name="DirectorFIO" Mode="In" Type="String" />
+            <Parameter Name="DirectorPhone" Mode="In" Type="String" />
+            <Parameter Name="DirectorEmail" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -643,6 +669,10 @@
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="add_partner_Result">
+          <Property Type="Int32" Name="Success" Nullable="false" />
+          <Property Type="Int32" Name="NewPartnerId" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -751,6 +781,7 @@
           <EntitySetMapping Name="partnershow">
             <EntityTypeMapping TypeName="new_criteriaModel.partnershow">
               <MappingFragment StoreEntitySet="partnershow">
+                <ScalarProperty Name="role" ColumnName="role" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="adress" ColumnName="adress" />
@@ -797,6 +828,14 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище new_criteriaModel.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище new_criteriaModel.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="add_partner" FunctionName="Хранилище new_criteriaModel.add_partner">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="new_criteriaModel.add_partner_Result">
+                <ScalarProperty Name="Success" ColumnName="Success" />
+                <ScalarProperty Name="NewPartnerId" ColumnName="NewPartnerId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

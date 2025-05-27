@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using for_new_сriteria.Model;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using for_new_сriteria.Model; 
 
 namespace for_new_сriteria.Pages
 {
@@ -20,12 +12,12 @@ namespace for_new_сriteria.Pages
     /// </summary>
     public partial class start : Page
     {
-        public new_criteriaEntities db = new new_criteriaEntities(); 
+        public new_criteriaEntities db = new new_criteriaEntities();
         public start()
         {
             InitializeComponent();
             ShowsNavigationUI = false;
-        } 
+        }
 
         public bool ValidateData(string log, string pas)
         {
@@ -33,7 +25,7 @@ namespace for_new_сriteria.Pages
             {
                 MessageBox.Show("Поля не должны быть пустыми");
                 MessageBox.Show("Пожалуйста, введите текстовое значение в поле <Логин>");
-                return false; 
+                return false;
             }
             if (string.IsNullOrEmpty(pas))
             {
@@ -53,12 +45,12 @@ namespace for_new_сriteria.Pages
                 MessageBox.Show("Пожалуйста, уберите пробелы в поле <Пароль>");
                 return false;
             }
-            else return true; 
+            else return true;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-          
+
             try
             {
                 string log = login.Text.Trim();
@@ -66,8 +58,8 @@ namespace for_new_сriteria.Pages
 
                 if (ValidateData(log, pas))
                 {
-                    var user = db.users.FirstOrDefault(u => u.email == log && u.password == pas); 
-                    if (user!=null)
+                    var user = db.users.FirstOrDefault(u => u.email == log && u.password == pas);
+                    if (user != null)
                     {
                         MessageBox.Show("Данные правильные!");
                         NavigationWindow w = (NavigationWindow)Application.Current.MainWindow;

@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace for_new_сriteria.Pages
 {
@@ -31,7 +21,7 @@ namespace for_new_сriteria.Pages
         public void CloseWindow()
         {
             try
-            {   
+            {
 
                 Window window = Window.GetWindow(this);
                 if (window != null)
@@ -60,10 +50,6 @@ namespace for_new_сriteria.Pages
             }
         }
 
-        private void close_Click(object sender, RoutedEventArgs e)
-        {
-            this.CloseWindow(); 
-        }
 
         private void postavki_Click(object sender, RoutedEventArgs e)
         {
@@ -91,6 +77,12 @@ namespace for_new_сriteria.Pages
                 MessageBox.Show("Возникла ошибка при переходе на выбранную страницу.");
                 MessageBox.Show("Пожалуйста, попробуйте закрыть все дополнительные ОКНА. Попробуйте перейти еще раз.");
             }
+        }
+
+
+        private void close_Click(object sender, RoutedEventArgs e)
+        {
+            this.CloseWindow();
         }
     }
 }
